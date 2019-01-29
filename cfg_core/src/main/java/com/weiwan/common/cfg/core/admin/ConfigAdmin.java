@@ -1,6 +1,7 @@
 package com.weiwan.common.cfg.core.admin;
 
 import com.weiwan.common.cfg.core.ConfigCenter;
+import com.weiwan.common.cfg.pojo.Config;
 import com.weiwan.common.cfg.zk.ZkEventListener;
 import com.weiwan.common.cfg.zk.ZkFactory;
 import org.apache.curator.framework.CuratorFramework;
@@ -95,6 +96,23 @@ public abstract class ConfigAdmin {
         ZkEventListener listener = new ZkEventListener(cache);
         listener.start(false);
         listeners.add(listener);
+    }
+
+
+    public boolean addConfigToCache(String modelKey, Config config) {
+        return context.put(modelKey, config);
+    }
+
+    public boolean reloadConfigToCache(String modelKey, Config config) {
+        Config oldConfig = context.get(modelKey);
+        if (oldConfig != null) {
+            boolean remove = context.remove(modelKey);
+            if (remove) {
+                boolean isOk = context.put(modelKey, config);
+                return isOk;
+            }
+        }
+        return false;
     }
 
 

@@ -1,5 +1,7 @@
 package com.weiwan.common.cfg.core.admin;
 
+import java.util.List;
+
 /**
  * @Date: 2019/1/29 13:26
  * @Author: xiaozhennan
@@ -12,13 +14,13 @@ public interface Admin {
 
     boolean reloadConfig(String modelKey, boolean isFull);
 
-    boolean loadConfig(String modelKey, boolean isFull);
+    boolean loadConfig(String modelKey);
 
-    boolean deleteConfig(String modelKey);
+    boolean deleteConfig(String modelKey, boolean isFull);
 
-    boolean disableConfig(String modelKey);
+    boolean disableConfig(String modelKey, boolean isFull);
 
-    boolean enableConfig(String modelKey);
+    boolean enableConfig(String modelKey, boolean isFull);
 
-    boolean clearConfig();
+    boolean loadConfigs(List<String> models);
 }

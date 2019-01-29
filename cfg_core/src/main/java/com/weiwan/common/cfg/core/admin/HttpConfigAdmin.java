@@ -2,6 +2,7 @@ package com.weiwan.common.cfg.core.admin;
 
 import com.weiwan.common.cfg.core.ConfigCenter;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,31 +23,30 @@ public class HttpConfigAdmin extends ConfigAdmin implements Admin {
 
     }
 
-    public boolean reloadConfig(String modelKey, String zkPath) {
-        return false;
-    }
+
 
     public boolean reloadConfig(String modelKey, boolean isFull) {
         return false;
     }
 
-    public boolean loadConfig(String modelKey, boolean isFull) {
+    public boolean loadConfig(String modelKey) {
         return false;
     }
 
-    public boolean deleteConfig(String modelKey) {
+    public boolean deleteConfig(String modelKey, boolean isFull) {
         return false;
     }
 
-    public boolean disableConfig(String modelKey) {
+    public boolean disableConfig(String modelKey, boolean isFull) {
         return false;
     }
 
-    public boolean enableConfig(String modelKey) {
+    public boolean enableConfig(String modelKey, boolean isFull) {
         return false;
     }
 
-    public boolean clearConfig() {
+
+    public boolean loadConfigs(List<String> models) {
         return false;
     }
 }

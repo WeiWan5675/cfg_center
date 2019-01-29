@@ -6,13 +6,14 @@ import com.weiwan.common.cfg.core.admin.HttpConfigAdmin;
 import com.weiwan.common.cfg.core.admin.RedisConfigAdmin;
 import com.weiwan.common.cfg.pojo.Config;
 import com.weiwan.common.cfg.pojo.ConfigEnum;
-import com.weiwan.common.cfg.zk.ZkEventDriver;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @Date: 2019/1/29 11:19
@@ -31,6 +32,8 @@ public class ConfigCenter {
     private Map<String, String> configuration;
 
     private Admin admin;
+
+    ReadWriteLock rwlock = new ReentrantReadWriteLock();
 
     /**
      * 初始化配置中心
@@ -107,4 +110,41 @@ public class ConfigCenter {
         return instance.admin;
     }
 
+
+    public boolean put(String key, Config config) {
+        rwlock.writeLock().lock();
+        try {
+            cache.put(key, config);
+            return true;
+        } finally {
+            rwlock.writeLock().unlock();
+        }
+    }
+
+    public Config get(String key) {
+        try {
+            rwlock.readLock().lock();
+            return cache.get(key);
+        } finally {
+            rwlock.readLock().unlock();
+        }
+    }
+
+    public boolean isExist(String key) {
+        return cache.containsKey(key);
+    }
+
+    public boolean remove(String key) {
+        rwlock.writeLock().lock();
+
+        try {
+            Config remove = cache.remove(key);
+            if (remove != null) {
+                return true;
+            }
+            return false;
+        } finally {
+            rwlock.writeLock().unlock();
+        }
+    }
 }

@@ -23,7 +23,7 @@ public class ZkEventDriver {
     public static boolean handlePassiveEvent(ZkEvent zkEvent) {
         String eventData = zkEvent.getEventData();
         String nodeName = zkEvent.getNodeName();
-        return admin.reloadConfig(eventData, nodeName);
+        return admin.reloadConfig(eventData,false);
     }
 
 
