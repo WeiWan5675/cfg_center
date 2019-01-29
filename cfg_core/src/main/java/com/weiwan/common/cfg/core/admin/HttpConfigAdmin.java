@@ -25,4 +25,28 @@ public class HttpConfigAdmin extends ConfigAdmin implements Admin {
     public boolean reloadConfig(String modelKey, String zkPath) {
         return false;
     }
+
+    public boolean reloadConfig(String modelKey, boolean isFull) {
+        return false;
+    }
+
+    public boolean loadConfig(String modelKey, boolean isFull) {
+        return false;
+    }
+
+    public boolean deleteConfig(String modelKey) {
+        return false;
+    }
+
+    public boolean disableConfig(String modelKey) {
+        return false;
+    }
+
+    public boolean enableConfig(String modelKey) {
+        return false;
+    }
+
+    public boolean clearConfig() {
+        return false;
+    }
 }

@@ -1,6 +1,7 @@
 package com.weiwan.common.cfg.core.admin;
 
 import com.weiwan.common.cfg.core.ConfigCenter;
+import com.weiwan.common.cfg.pojo.Config;
 import com.weiwan.common.cfg.utils.RedisFactory;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class RedisConfigAdmin extends ConfigAdmin implements Admin {
 
 
     public boolean reloadConfig(String modelKey, String zkPath) {
+        Config config = new Config();
+
         //根据ModelName获取配置信息
         System.out.println("reload");
         //调用ConfigAdmin的组装方法组装配置对象
@@ -41,5 +44,29 @@ public class RedisConfigAdmin extends ConfigAdmin implements Admin {
 
     public RedisConfigAdmin(Map<String, String> configuration, ConfigCenter configCenter) throws Exception {
         super(configuration, configCenter);
+    }
+
+    public boolean reloadConfig(String modelKey, boolean isFull) {
+        return false;
+    }
+
+    public boolean loadConfig(String modelKey, boolean isFull) {
+        return false;
+    }
+
+    public boolean deleteConfig(String modelKey) {
+        return false;
+    }
+
+    public boolean disableConfig(String modelKey) {
+        return false;
+    }
+
+    public boolean enableConfig(String modelKey) {
+        return false;
+    }
+
+    public boolean clearConfig() {
+        return false;
     }
 }
