@@ -1,4 +1,3 @@
-import com.weiwan.common.cfg.pojo.CfgConstant;
 import com.weiwan.common.cfg.pojo.Config;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class TestConfig {
         conf.put("testList", new ArrayList<String>());
         conf.put("testString", "adada");
 
-        conf.put("testtt", new CfgConstant());
+        conf.put("testtt", new Object());
 
         List<String> testList = conf.getList("testList");
 

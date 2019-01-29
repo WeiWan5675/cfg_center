@@ -1,14 +1,12 @@
 package com.weiwan.common.cfg.pojo;
 
 /**
- * @Date: 2019/1/29 12:24
+ * @Date: 2019/1/29 13:22
  * @Author: xiaozhennan
  * @Package: com.weiwan.common.cfg.pojo
- * @ClassName: CfgConstant
+ * @ClassName: Cfg
  * @Description:
  **/
-public class CfgConstant {
-
-
+public interface Cfg {
 
 }
