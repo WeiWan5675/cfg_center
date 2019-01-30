@@ -1,21 +1,20 @@
-package com.weiwan.common.cfg.core.admin;
+package com.ipaynow.dc.common.cfg.core.admin;
 
-import com.weiwan.common.cfg.core.ConfigCenter;
-import com.weiwan.common.cfg.pojo.Config;
-import com.weiwan.common.cfg.zk.ZkEventListener;
-import com.weiwan.common.cfg.zk.ZkFactory;
+import com.ipaynow.dc.common.cfg.core.ConfigCenter;
+import com.ipaynow.dc.common.cfg.pojo.Config;
+import com.ipaynow.dc.common.cfg.zk.ZkEventListener;
+import com.ipaynow.dc.common.cfg.zk.ZkFactory;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Date: 2019/1/29 11:25
@@ -25,7 +24,7 @@ import java.util.Map;
  * @Description: 配置中心管理者
  **/
 public abstract class ConfigAdmin {
-
+    public static final Logger logger = LoggerFactory.getLogger(ConfigAdmin.class);
     protected final ConfigCenter context;
     protected Map<String, String> configuration;
     protected ZkFactory zkFactory;
@@ -40,7 +39,7 @@ public abstract class ConfigAdmin {
 
     public void initSuper() throws Exception {
         //初始化配置
-        System.out.println("开始加载配置");
+        logger.info("开始加载配置");
         //初始化应用节点
         String baseDir = configuration.get("cfg.zk.base.dir");
         String zkServers = configuration.get("cfg.zk.servers");
@@ -56,7 +55,7 @@ public abstract class ConfigAdmin {
 
     private void _initZkNode() throws Exception {
         CuratorFramework client = zkFactory.getClient();
-        System.out.println("初始化Zk节点");
+        logger.info("初始化Zk节点");
 //创建基础目录
         String confDir = configuration.get("cfg.zk.conf.dir");
         String lockDir = configuration.get("cfg.zk.lock.dir");
@@ -91,7 +90,7 @@ public abstract class ConfigAdmin {
 
     protected void _initZkWatch() throws Exception {
         CuratorFramework client = zkFactory.getClient();
-        System.out.println("初始化zk监听");
+        logger.info("初始化zk监听");
         NodeCache cache = new NodeCache(client, configuration.get("cfg.zk.config.watch.dir"), false);
         ZkEventListener listener = new ZkEventListener(cache);
         listener.start(false);
@@ -111,8 +110,22 @@ public abstract class ConfigAdmin {
                 boolean isOk = context.put(modelKey, config);
                 return isOk;
             }
+        } else {
+            return context.put(modelKey, config);
         }
         return false;
+    }
+
+    public Set<String> catConfigList() {
+        return context.getCache().keySet();
+    }
+
+    public boolean reloadAllConfig(Map<String, Config> tmpCache) {
+        return context.replaceAll(tmpCache);
+    }
+
+    public String catConfigStatus() {
+        return context.printCacheStatus();
     }
 
 

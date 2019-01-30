@@ -1,4 +1,4 @@
-package com.weiwan.common.cfg.pojo;
+package com.ipaynow.dc.common.cfg.pojo;
 
 import java.io.Serializable;
 
@@ -11,8 +11,15 @@ import java.io.Serializable;
  **/
 public class Config extends AbstractConfig implements Cfg, Serializable {
     private String modelName;
-    private String version;
+    private Integer version;
     private boolean enable;
 
 
+    public Config(String modelKey) {
+        super();
+    }
+
+    public Config() {
+        super();
+    }
 }

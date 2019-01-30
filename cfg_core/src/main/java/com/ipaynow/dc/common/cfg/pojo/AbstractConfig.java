@@ -1,4 +1,4 @@
-package com.weiwan.common.cfg.pojo;
+package com.ipaynow.dc.common.cfg.pojo;
 
 
 import java.util.Collection;

@@ -1,11 +1,15 @@
-package com.weiwan.common.cfg.core;
+package com.ipaynow.dc.common.cfg.core;
 
-import com.weiwan.common.cfg.core.admin.Admin;
-import com.weiwan.common.cfg.core.admin.DBConfigAdmin;
-import com.weiwan.common.cfg.core.admin.HttpConfigAdmin;
-import com.weiwan.common.cfg.core.admin.RedisConfigAdmin;
-import com.weiwan.common.cfg.pojo.Config;
-import com.weiwan.common.cfg.pojo.ConfigEnum;
+import com.alibaba.fastjson.JSONObject;
+import com.ipaynow.dc.common.cfg.core.admin.Admin;
+import com.ipaynow.dc.common.cfg.core.admin.DBConfigAdmin;
+import com.ipaynow.dc.common.cfg.core.admin.HttpConfigAdmin;
+import com.ipaynow.dc.common.cfg.core.admin.RedisConfigAdmin;
+import com.ipaynow.dc.common.cfg.pojo.Config;
+import com.ipaynow.dc.common.cfg.pojo.CfgException;
+import com.ipaynow.dc.common.cfg.pojo.ConfigEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +28,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  **/
 public class ConfigCenter {
 
+    public static final Logger logger = LoggerFactory.getLogger(ConfigCenter.class);
+
     //单例对象
     private static ConfigCenter instance;
     //配置缓存
@@ -40,13 +46,16 @@ public class ConfigCenter {
      */
     private void init() throws Exception {
         //进行本地配置的加载
+        logger.info("开始初始化ConfigCenter");
         Properties pros = new Properties();
         InputStream in = null;
         try {
             in = this.getClass().getClassLoader().getResourceAsStream("configcenter.properties");
+            logger.info("加载默认配置文件");
             pros.load(in);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("加载默认配置文件出错", e);
+            throw e;
         } finally {
             if (in != null) {
                 in.close();
@@ -58,6 +67,7 @@ public class ConfigCenter {
         }
         configuration = (Map) pros;
         String _type = configuration.get("cfg.db.type");
+        logger.info("配置管理器选择:{},", _type);
         if (_type.equals(ConfigEnum.ADMIN_TYPE_DB.key())) {
             admin = new DBConfigAdmin(configuration, this);
         } else if (_type.equals(ConfigEnum.ADMIN_TYPE_HTTP.key())) {
@@ -66,6 +76,8 @@ public class ConfigCenter {
             admin = new RedisConfigAdmin(configuration, this);
         } else {
             //没有对应的
+            logger.error("没有配置任何配置管理器类型!请检查配置");
+            throw new CfgException("9999", "参数错误");
         }
 
     }
@@ -145,6 +157,38 @@ public class ConfigCenter {
             return false;
         } finally {
             rwlock.writeLock().unlock();
+        }
+    }
+
+    public boolean replaceAll(Map<String, Config> tmpCache) {
+        try {
+            rwlock.writeLock().lock();
+            for (String key : tmpCache.keySet()) {
+                cache.put(key, tmpCache.get(key));
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            rwlock.writeLock().unlock();
+        }
+    }
+
+
+    public String printCacheStatus() {
+        JSONObject json = new JSONObject();
+        json.put("config_center", cache);
+        return json.toJSONString();
+    }
+
+
+    public Config getModel(String modelKey) {
+        rwlock.readLock().lock();
+        try {
+            return cache.get(modelKey);
+        } finally {
+            rwlock.readLock().unlock();
         }
     }
 }

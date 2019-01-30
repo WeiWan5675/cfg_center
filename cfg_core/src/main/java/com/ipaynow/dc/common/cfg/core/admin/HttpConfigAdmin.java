@@ -1,6 +1,6 @@
-package com.weiwan.common.cfg.core.admin;
+package com.ipaynow.dc.common.cfg.core.admin;
 
-import com.weiwan.common.cfg.core.ConfigCenter;
+import com.ipaynow.dc.common.cfg.core.ConfigCenter;
 
 import java.util.List;
 import java.util.Map;

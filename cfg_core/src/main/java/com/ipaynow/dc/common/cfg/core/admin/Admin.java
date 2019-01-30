@@ -1,4 +1,4 @@
-package com.weiwan.common.cfg.core.admin;
+package com.ipaynow.dc.common.cfg.core.admin;
 
 import java.util.List;
 

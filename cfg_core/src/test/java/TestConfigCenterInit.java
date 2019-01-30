@@ -1,9 +1,8 @@
-import com.weiwan.common.cfg.core.admin.Admin;
-import com.weiwan.common.cfg.core.ConfigCenter;
-import com.weiwan.common.cfg.pojo.Config;
+import com.ipaynow.dc.common.cfg.core.admin.Admin;
+import com.ipaynow.dc.common.cfg.core.ConfigCenter;
+import com.ipaynow.dc.common.cfg.pojo.Config;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,20 +31,20 @@ public class TestConfigCenterInit {
         Admin admin = configCenter.getAdmin();
 
 
-        boolean b = admin.loadConfig("dc.consumer.config.app.key.40000");
-        System.out.println(b);
+//        boolean b = admin.loadConfig("dc.consumer.config.app.key.40000");
+//        System.out.println(b);
         //获得配置缓存
         Map<String, Config> cache = configCenter.getCache();
-        //获得model配置
-        Config aaa = cache.get("model1");
-        String s = aaa.get("");
-        Map<String, String> ada = aaa.getMap("ada");
-        List<String> aa = aaa.getList("aa");
-        Object lll = aaa.getObject("lll");
-        //获得配置
-        String key1 = aaa.get("key1");
-        //使用配置
-        System.out.println(key1);
+//        //获得model配置
+//        Config aaa = cache.get("model1");
+//        String s = aaa.get("");
+//        Map<String, String> ada = aaa.getMap("ada");
+//        List<String> aa = aaa.getList("aa");
+//        Object lll = aaa.getObject("lll");
+//        //获得配置
+//        String key1 = aaa.get("key1");
+//        //使用配置
+//        System.out.println(key1);
         while (true) {
 
         }

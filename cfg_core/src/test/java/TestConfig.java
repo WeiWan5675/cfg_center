@@ -1,4 +1,4 @@
-import com.weiwan.common.cfg.pojo.Config;
+import com.ipaynow.dc.common.cfg.pojo.Config;
 
 import java.util.ArrayList;
 import java.util.HashMap;

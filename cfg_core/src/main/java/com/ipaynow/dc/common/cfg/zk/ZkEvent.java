@@ -1,4 +1,4 @@
-package com.weiwan.common.cfg.zk;
+package com.ipaynow.dc.common.cfg.zk;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;

@@ -1,4 +1,4 @@
-package com.weiwan.common.cfg.utils;
+package com.ipaynow.dc.common.cfg.utils;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
