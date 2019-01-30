@@ -22,7 +22,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @Date: 2019/1/29 11:19
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.core
+ * @Package: com.ipaynow.dc.common.cfg.core
  * @ClassName: ConfigCenter
  * @Description: 配置组件主类, 用户创建配置中心的对象/作为组件植入代码中
  **/

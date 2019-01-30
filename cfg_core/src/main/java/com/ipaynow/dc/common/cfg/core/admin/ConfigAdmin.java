@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * @Date: 2019/1/29 11:25
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.core
+ * @Package: com.ipaynow.dc.common.cfg.core
  * @ClassName: ConfigManager
  * @Description: 配置中心管理者
  **/

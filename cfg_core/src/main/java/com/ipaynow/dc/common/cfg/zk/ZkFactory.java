@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @Date: 2019/1/29 11:24
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.zk
+ * @Package: com.ipaynow.dc.common.cfg.zk
  * @ClassName: ZkFactory
  * @Description:
  **/

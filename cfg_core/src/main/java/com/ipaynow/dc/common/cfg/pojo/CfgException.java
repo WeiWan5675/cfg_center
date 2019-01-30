@@ -3,7 +3,7 @@ package com.ipaynow.dc.common.cfg.pojo;
 /**
  * @Date: 2019/1/30 15:15
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.pojo
+ * @Package: com.ipaynow.dc.common.cfg.pojo
  * @ClassName: CfgException
  * @Description:
  **/

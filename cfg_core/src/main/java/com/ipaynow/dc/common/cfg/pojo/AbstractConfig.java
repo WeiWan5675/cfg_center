@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @Date: 2019/1/29 11:25
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.pojo
+ * @Package: com.ipaynow.dc.common.cfg.pojo
  * @ClassName: Config
  * @Description: 配置对象类
  **/

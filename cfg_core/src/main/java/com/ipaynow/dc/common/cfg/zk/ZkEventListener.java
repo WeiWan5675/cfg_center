@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @Date: 2019/1/29 16:05
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.core.admin
+ * @Package: com.ipaynow.dc.common.cfg.core.admin
  * @ClassName: ZkEventListener
  * @Description:
  **/

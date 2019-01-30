@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @Date: 2019/1/29 13:26
  * @Author: xiaozhennan
- * @Package: com.weiwan.common.cfg.core
+ * @Package: com.ipaynow.dc.common.cfg.core
  * @ClassName: Admin
  * @Description:
  **/
