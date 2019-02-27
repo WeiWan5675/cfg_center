@@ -52,7 +52,7 @@ public class RedisConfigAdmin extends ConfigAdmin implements Admin {
                     tmpCache.put(configKey, config);
                 }
                 boolean flag = reloadAllConfig(tmpCache);
-                logger.info( catConfigStatus());
+                logger.info(catConfigStatus());
                 return flag;
             } else {
                 logger.info("要Reload的Model:{}", modelKey);
@@ -60,7 +60,7 @@ public class RedisConfigAdmin extends ConfigAdmin implements Admin {
                 Map<String, String> modelMap = jedis.hgetAll(modelKey);
                 handleModelMap(config, jedis, modelMap);
                 boolean flag = reloadConfigToCache(modelKey, config);
-                logger.info( catConfigStatus());
+                logger.info(catConfigStatus());
                 return flag;
             }
         } finally {
@@ -77,7 +77,7 @@ public class RedisConfigAdmin extends ConfigAdmin implements Admin {
             Map<String, String> modelMap = jedis.hgetAll(modelKey);
             handleModelMap(config, jedis, modelMap);
             boolean flag = addConfigToCache(modelKey, config);
-            logger.info( catConfigStatus());
+            logger.info(catConfigStatus());
             return flag;
         } finally {
             redisInstance.closeClient(jedis);
@@ -98,7 +98,10 @@ public class RedisConfigAdmin extends ConfigAdmin implements Admin {
 
 
     public boolean loadConfigs(List<String> models) {
-        return false;
+        for (String model : models) {
+            loadConfig(model);
+        }
+        return true;
     }
 
     private void handleModelMap(Config config, Jedis jedis, Map<String, String> modelMap) {

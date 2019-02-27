@@ -2,8 +2,11 @@ package com.ipaynow.dc.common.cfg.zk;
 
 import com.ipaynow.dc.common.cfg.core.ConfigCenter;
 import com.ipaynow.dc.common.cfg.core.admin.Admin;
+import com.ipaynow.dc.common.cfg.pojo.EventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.ipaynow.dc.common.cfg.pojo.EventType.LOAD;
 
 /**
  * @Date: 2018/10/17 10:34
@@ -24,7 +27,29 @@ public class ZkEventDriver {
      * @param zkEvent
      * @return
      */
-    public static boolean handlePassiveEvent(ZkEvent zkEvent) {
+    public static boolean handleEvent(ZkEvent zkEvent) {
+//
+//
+//        switch (zkEvent.eventType) {
+//            case LOAD:
+//                //获取所有的
+//                break;
+//            case LOAD_ALL:
+//                break;
+//            case DELETE:
+//                break;
+//            case DELETE_ALL:
+//                break;
+//            case ENABLE:
+//                break;
+//            case ENABLE_ALL:
+//                break;
+//            case DISABLE:
+//                break;
+//            case DISABLE_ALL:
+//                break;
+//        }
+
         String eventData = zkEvent.getEventData();
         if (eventData != null && eventData.equals("reload_all")) {
             logger.info("reload_all事件触发");

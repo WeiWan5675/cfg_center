@@ -1,5 +1,6 @@
 package com.ipaynow.dc.common.cfg.zk;
 
+import com.ipaynow.dc.common.cfg.pojo.EventType;
 import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.slf4j.Logger;
@@ -20,11 +21,11 @@ public class ZkEventListener implements NodeCacheListener {
     public void nodeChanged() {
         byte[] data = nodeCache.getCurrentData().getData();
         String eventData = new String(data);
-        logger.info("监听到节点数据发生变化,数据:{}", eventData);
         if (null != eventData && !"".equals(eventData)) {
-            ZkEvent zkEvent = new ZkEvent(eventData, nodeName);
-            ZkEventDriver.handlePassiveEvent(zkEvent);
+            ZkEventDriver.handleEvent(new ZkEvent(eventData));
+            logger.info("监听到节点数据发生变化,数据:{}", eventData);
         }
+
     }
 
 

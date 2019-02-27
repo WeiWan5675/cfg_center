@@ -6,6 +6,7 @@ import com.ipaynow.dc.common.cfg.zk.ZkEventListener;
 import com.ipaynow.dc.common.cfg.zk.ZkFactory;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
@@ -117,6 +118,7 @@ public abstract class ConfigAdmin {
     }
 
     public Set<String> catConfigList() {
+        //TODO 优化点
         return context.getCache().keySet();
     }
 

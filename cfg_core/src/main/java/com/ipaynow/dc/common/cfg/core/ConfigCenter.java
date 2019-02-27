@@ -61,7 +61,6 @@ public class ConfigCenter {
                 in.close();
             }
         }
-        //TODO 将本地配置和用户配置混合到一起
         for (String key : configuration.keySet()) {
             pros.put(key, configuration.get(key));
         }
@@ -115,7 +114,12 @@ public class ConfigCenter {
     }
 
     public Map<String, Config> getCache() {
-        return cache;
+        try {
+            rwlock.readLock().lock();
+            return cache;
+        } finally {
+            rwlock.readLock().unlock();
+        }
     }
 
     public static Admin getAdmin() {
