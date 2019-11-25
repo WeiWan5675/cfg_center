@@ -45,6 +45,7 @@ public class ConfigCenter {
      * 初始化配置中心
      */
     private void init() throws Exception {
+        //TODO 测试deepin git is ok
         //进行本地配置的加载
         logger.info("开始初始化ConfigCenter");
         Properties pros = new Properties();
